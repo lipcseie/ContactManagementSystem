@@ -29,6 +29,16 @@ namespace ContactManagementSystem.Context
             modelBuilder.Entity<Contact>()
                 .Property(c => c.PhoneNumber)
                 .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .HasIndex(c => c.Name)
+                .IsUnique();
+
+            modelBuilder.Entity<Contact>()
+                .HasIndex(c => c.PhoneNumber)
+                .IsUnique();
+
+
             base.OnModelCreating(modelBuilder);
         }
     }
