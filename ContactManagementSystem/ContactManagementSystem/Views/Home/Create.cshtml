@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Add new Connact";
+    ViewData["Title"] = "Add new Contact";
 }
 
 <div class="text-center">
@@ -11,55 +11,57 @@
 <form id="contactForm" asp-action="Create" method="post">
     <div class="form-group">
         <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" placeholder="Enter the name" />
-        <span id="nameError" asp-validation-for="Name" class="text-isRequred"></span>
+        <input asp-for="Name" id="Name" class="form-control" placeholder="Enter the name" />
+        <span id="nameError" asp-validation-for="Name" class="text-isRequired"></span>
     </div>
     <div class="form-group">
         <label asp-for="City"></label>
-        <input asp-for="City" class="form-control" placeholder="Enter the city" />
-        <span id="cityError" asp-validation-for="City" class="text-isRequred"></span>
+        <input asp-for="City" id="City" class="form-control" placeholder="Enter the city" />
+        <span id="cityError" asp-validation-for="City" class="text-isRequired"></span>
     </div>
     <div class="form-group">
         <label asp-for="PhoneNumber"></label>
-        <input asp-for="PhoneNumber" class="form-control" placeholder="Enter the number" />
-        <span id="numberError" asp-validation-for="PhoneNumber" class="text-isRequred"></span>
+        <input asp-for="PhoneNumber" id="PhoneNumber" class="form-control" placeholder="Enter the number" />
+        <span id="phoneError" asp-validation-for="PhoneNumber" class="text-isRequired"></span>
     </div>
-    <button type="submit" class="btn btn-primary" onclick="validateForm()">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 <script>
-    function validateForm() {
-        var name = documnet.getElemtByID("Name").value.trim();
-        var city = documnet.getElemtByID("City").value.trim();
+    function validateForm(event) {
+        var name = document.getElementById("Name").value.trim();
+        var city = document.getElementById("City").value.trim();
         var phoneNumber = document.getElementById("PhoneNumber").value.trim();
         var nameError = document.getElementById("nameError");
         var cityError = document.getElementById("cityError");
         var phoneError = document.getElementById("phoneError");
 
-        nameError.innerText = "";
-        phoneError.innerText = "";
-        cityError.innerText = "";
+        nameError.innerText = '';
+        cityError.innerText = '';
+        phoneError.innerText = '';
         document.getElementById("Name").style.border = '1px solid #ced4da';
         document.getElementById("City").style.border = '1px solid #ced4da';
         document.getElementById("PhoneNumber").style.border = '1px solid #ced4da';
 
-        if (name === "") {
-            nameError.innerText = "Name is required";
+        if (name === '') {
+            nameError.innerText = 'This is a required field.';
             document.getElementById("Name").style.border = '1px solid red';
+        }
+
+        if (phoneNumber === '') {
+            phoneError.innerText = 'This is a required field.';
+            document.getElementById("PhoneNumber").style.border = '1px solid red';
         }
 
         if (city === "") {
-            nameError.innerText = "City is required";
-            document.getElementById("Name").style.border = '1px solid red';
+            cityError.innerText = "City is required";
+            document.getElementById("City").style.border = '1px solid red';
         }
 
-        if (phoneNumber === "") {
-            nameError.innerText = "Number is required";
-            document.getElementById("Name").style.border = '1px solid red';
-        }
-
-    if (name === '' || phoneNumber === '' || city === '') {
+        if (name === '' || phoneNumber === '' || city === '') {
             event.preventDefault();
-        } 
+        }
     }
+
+    document.getElementById("contactForm").addEventListener("submit", validateForm);
 </script>
