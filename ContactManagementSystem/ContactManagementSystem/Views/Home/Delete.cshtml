@@ -1,0 +1,33 @@
+﻿@model ContactManagementSystem.Models.Contact
+
+<div class="text-center">
+    <h1 class="display-4">Delete Contact</h1>
+
+    @if (Model != null)
+    {
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Are you sure you want to delete this contact?</h4>
+            <hr>
+            <p class="mb-0">Please confirm your action. This process cannot be undone.</p>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Name: @Model.Name</h5>
+                <h6 class="card-subtitle mb-2 text-muted">City: @Model.City</h6>
+                <p class="card-text">Number: @Model.PhoneNumber</p>
+
+                <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="mt-4">
+                    <input type="submit" value="Delete" class="btn btn-danger btn-lg" />
+                    <a asp-action="Index" class="btn btn-secondary btn-lg">Cancel</a>
+                </form>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            <p>@ViewData["Message"]</p>
+        </div>
+        <a asp-action="Index" class="btn btn-primary">Go back</a>
+    }
+</div>
