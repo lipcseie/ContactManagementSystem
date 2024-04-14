@@ -20,7 +20,7 @@
         <span id="cityError" asp-validation-for="City" class="text-isRequired"></span>
     </div>
     <div class="form-group">
-        <label asp-for="PhoneNumber"></label>
+        <label asp-for="PhoneNumber">Number</label>
         <input asp-for="PhoneNumber" id="PhoneNumber" class="form-control" placeholder="Enter the number" />
         <span id="phoneError" asp-validation-for="PhoneNumber" class="text-isRequired"></span>
     </div>
@@ -44,12 +44,12 @@
         document.getElementById("PhoneNumber").style.border = '1px solid #ced4da';
 
         if (name === '') {
-            nameError.innerText = 'This is a required field.';
+            nameError.innerText = 'Name is required.';
             document.getElementById("Name").style.border = '1px solid red';
         }
 
         if (phoneNumber === '') {
-            phoneError.innerText = 'This is a required field.';
+            phoneError.innerText = 'Number is required.';
             document.getElementById("PhoneNumber").style.border = '1px solid red';
         }
 
