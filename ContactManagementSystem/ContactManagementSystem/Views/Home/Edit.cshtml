@@ -9,6 +9,10 @@
     <input type="hidden" asp-for="Id" />
 
     <div class="form-group">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
         <label asp-for="Name" class="font-weight-bold">Name</label>
         <input asp-for="Name" class="form-control form-control-sm" placeholder="Enter full name" />
         <span asp-validation-for="Name" class="text-danger"></span>
