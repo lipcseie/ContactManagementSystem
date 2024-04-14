@@ -22,7 +22,7 @@ else
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col"></th>
+                    <th scope="col">Address</th>
                     <th scope="col">Number</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
@@ -32,7 +32,7 @@ else
                 @foreach (var contact in Model)
                 {
                     <tr>
-                        <th scope="row">@contact.Id</th>
+                        <td>@contact.Id</td>
                         <td>@contact.Name</td>
                         <td>@contact.Address</td>
                         <td>@contact.PhoneNumber</td>
