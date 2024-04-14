@@ -2,28 +2,29 @@
 
 <div class="text-center">
     <h1 class="display-4">Edit Contact</h1>
+    <p class="lead">Update the contact information below.</p>
 </div>
 
-<form asp-action="Edit" method="post">
+<form id="contactForm" asp-action="Edit" method="post" class="mt-4 w-50 mx-auto">
     <input type="hidden" asp-for="Id" />
 
     <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-isRequired"></span>
+        <label asp-for="Name" class="font-weight-bold">Name</label>
+        <input asp-for="Name" class="form-control form-control-sm" placeholder="Enter full name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="City"></label>
-        <input asp-for="City" class="form-control" />
-        <span asp-validation-for="City" class="text-isRequired"></span>
+        <label asp-for="Address" class="font-weight-bold">Address</label>
+        <input asp-for="Address" class="form-control form-control-sm" placeholder="Enter address name" />
+        <span asp-validation-for="Address" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="PhoneNumber">Number</label>
-        <input asp-for="PhoneNumber" class="form-control" />
-        <span asp-validation-for="PhoneNumber" class="text-isRequired"></span>
+        <label asp-for="PhoneNumber" class="font-weight-bold">Number</label>
+        <input asp-for="PhoneNumber" class="form-control form-control-sm" placeholder="Enter the number" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-success btn-sm btn-block mt-3 mb-3">Update Contact</button>
 </form>

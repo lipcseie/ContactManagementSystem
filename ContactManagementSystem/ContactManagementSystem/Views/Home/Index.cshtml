@@ -3,36 +3,41 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    
+    <h1 class="display-4">Welcome to Your Contact Management System</h1>
+    <p class="lead">Easily manage your contacts all in one place.</p>
 </div>
 
 @if (Model.Count == 0)
 {
-    <h2 class="text-center"><strong>No data available</strong></h2>
+    <div class="alert alert-secondary mt-5" role="alert">
+        <h4 class="alert-heading">No data available</h4>
+        <p>Please add new contacts to view them here.</p>
+    </div>
 }
 else
 {
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>City</th>
-                <th>Number</th>
-                <th><i class="fas fa-pencil-alt"></i></th>
-                <th><i class="fas fa-trash"></i></th>
-            </tr>
+    <div class="table-responsive mt-5">
+        <table class="table table-hover shadow-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
             <tbody>
                 @foreach (var contact in Model)
                 {
                     <tr>
-                    <td>@contact.Id</td>
-                    <td>@contact.Name</td>
-                    <td>@contact.City</td>
-                    <td>@contact.PhoneNumber</td>
-                    <td><a asp-action="Edit" asp-route-id="@contact.Id" asp-method="post"><i class="fas fa-pencil-alt"></i></a></td>
-                    <td><a asp-action="Delete" asp-route-id="@contact.Id"><i class="fas fa-trash"></i></a></td>
+                        <th scope="row">@contact.Id</th>
+                        <td>@contact.Name</td>
+                        <td>@contact.Address</td>
+                        <td>@contact.PhoneNumber</td>
+                        <td><a asp-action="Edit" asp-route-id="@contact.Id" class="text-primary"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a asp-action="Delete" asp-route-id="@contact.Id" class="text-danger"><i class="fas fa-trash"></i></a></td>
                     </tr>
                 }
             </tbody>
@@ -40,6 +45,6 @@ else
     </div>
 }
 
-<div class="text-center">
-    <a asp-area="" asp-controller="Home" asp-action="Create"> + Add Contact</a>
+<div class="text-center mt-4">
+    <a asp-area="" asp-controller="Home" asp-action="Create" class="btn btn-primary btn-lg">+ Add Contact</a>
 </div>

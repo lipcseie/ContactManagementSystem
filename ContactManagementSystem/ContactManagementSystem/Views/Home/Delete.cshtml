@@ -13,7 +13,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Name: @Model.Name</h5>
-                <h6 class="card-subtitle mb-2 text-muted">City: @Model.City</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Address: @Model.Address</h6>
                 <p class="card-text">Number: @Model.PhoneNumber</p>
 
                 <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="mt-4">

@@ -23,7 +23,7 @@ namespace ContactManagementSystem.Context
                 .IsRequired();
 
             modelBuilder.Entity<Contact>()
-                .Property(c => c.City)
+                .Property(c => c.Address)
                 .IsRequired();
 
             modelBuilder.Entity<Contact>()
