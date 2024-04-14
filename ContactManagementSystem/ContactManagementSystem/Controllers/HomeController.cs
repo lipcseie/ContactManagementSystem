@@ -1,6 +1,7 @@
 using ContactManagementSystem.Models;
 using ContactManagementSystem.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace ContactManagementSystem.Controllers
@@ -30,8 +31,17 @@ namespace ContactManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _contactService.AddContactAsync(contact);
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _contactService.AddContactAsync(contact);
+                    return RedirectToAction(nameof(Index));
+
+                }
+                catch(DbUpdateException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. " + "A contact with the same name or phone number already exists.");
+
+                }
             }
             return View();
         }
@@ -52,8 +62,16 @@ namespace ContactManagementSystem.Controllers
 
             if (ModelState.IsValid)
             {
-                await _contactService.UpdateContactAsync(contact);
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _contactService.UpdateContactAsync(contact);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. " + "A contact with the same name or phone number already exists.");
+
+                }
             }
             return View(contact);
         }
@@ -70,11 +88,6 @@ namespace ContactManagementSystem.Controllers
         {
             await _contactService.DeleteContactAsync(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
