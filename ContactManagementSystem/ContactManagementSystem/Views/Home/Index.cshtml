@@ -11,3 +11,35 @@
 {
     <h2 class="text-center"><strong>No data available</strong></h2>
 }
+else
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Number</th>
+                <th><i class="fas fa-pencil-alt"></i></th>
+                <th><i class="fas fa-trash"></i></th>
+            </tr>
+            <tbody>
+                @foreach (var contact in Model)
+                {
+                    <tr>
+                    <td>@contact.Id</td>
+                    <td>@contact.Name</td>
+                    <td>@contact.City</td>
+                    <td>@contact.Number</td>
+                    <td><a asp-action="Edit" asp-route-id="@contact.Id" asp-method="post"><i class="fas fa-pencil-alt"></i></a></td>
+                    <td><a asp-action="Delete" asp-route-id="@contact.Id"><i class="fas fa-trash"></i></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Home" asp-action="Create"> + Add Contact</a>
+</div>
