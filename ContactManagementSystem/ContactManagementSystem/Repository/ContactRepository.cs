@@ -1,33 +1,45 @@
 ﻿using ContactManagementSystem.Models;
+using ContactManagementSystem.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContactManagementSystem.Repository
 {
     public class ContactRepository : IContactRepository
     {
-        private readonly ContactsContexts _contacts;
-        public Task AddContact(Contact contact)
+        private readonly ContactsContext _context;
+
+        public ContactRepository(ContactsContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task DeleteContact(int id)
+        public async Task<IEnumerable<Contact>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Contacts.ToListAsync();
         }
 
-        public Task<IEnumerable<Contact>> GetAll()
+        public async Task<Contact> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Contacts.FindAsync(id);
         }
 
-        public Task<Contact> GetById(int id)
+        public async Task AddContactAsync(Contact contact)
         {
-            throw new NotImplementedException();
+            _context.Contacts.Add(contact);
+            await _context.SaveChangesAsync();
         }
 
-        public Task UpdateContact(Contact contact)
+        public async Task UpdateContactAsync(Contact contact)
         {
-            throw new NotImplementedException();
+            _context.Entry(contact).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
+        public async Task DeleteContactAsync(int id)
+        {
+            var contact = await _context.Contacts.FindAsync(id);
+            _context.Contacts.Remove(contact);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

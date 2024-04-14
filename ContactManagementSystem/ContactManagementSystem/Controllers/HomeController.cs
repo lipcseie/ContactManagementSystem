@@ -1,4 +1,5 @@
 using ContactManagementSystem.Models;
+using ContactManagementSystem.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +7,17 @@ namespace ContactManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IContactService _contactService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IContactService contactService)
         {
-            _logger = logger;
+            _contactService = contactService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var contacts = await _contactService.GetAllContactsAsync();
+            return View(contacts);
         }
 
         public IActionResult Privacy()
