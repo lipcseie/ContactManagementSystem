@@ -18,6 +18,10 @@ namespace ContactManagementSystem.Repository
             return await _context.Contacts.ToListAsync();
         }
 
+        public async Task<Contact> GetByIdAsync(int id)
+        {
+            return await _context.Contacts.FindAsync(id);
+        }
 
         public async Task AddContactAsync(Contact contact)
         {

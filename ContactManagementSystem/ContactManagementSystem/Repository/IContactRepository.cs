@@ -6,6 +6,8 @@ namespace ContactManagementSystem.Repository
     {
         Task<IEnumerable<Contact>> GetAllAsync();
 
+        Task<Contact> GetByIdAsync(int id);
+
         Task AddContactAsync(Contact contact);
 
         Task UpdateContactAsync(Contact contact);
