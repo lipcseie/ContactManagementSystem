@@ -50,7 +50,26 @@ namespace ContactManagementSystem.Controllers
                 return NotFound();
             }
 
+            if (ModelState.IsValid)
+            {
+                await _contactService.UpdateContactAsync(contact);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(contact);
+        }
 
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var contact = await _contactService.GetContactByIdAsync(id);
+            return View(contact);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfimed(int id)
+        {
+            await _contactService.DeleteContactAsync(id);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()
