@@ -1,6 +1,6 @@
-﻿using ContactManagementSystem.Models;
+﻿using ContactManagementSystem.Entities.Models;
 
-namespace ContactManagementSystem.Repository
+namespace ContactManagementSystem.DataAccessLayer.Repository
 {
     public interface IContactRepository
     {

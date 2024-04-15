@@ -1,7 +1,7 @@
-﻿using ContactManagementSystem.Models;
+﻿using ContactManagementSystem.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContactManagementSystem.Context
+namespace ContactManagementSystem.DataAccessLayer.Context
 {
     public class ContactsContext : DbContext
     {

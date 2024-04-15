@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using ContactManagementSystem.Context;
-using ContactManagementSystem.Repository;
-using ContactManagementSystem.Services;
+using ContactManagementSystem.DataAccessLayer.Context;
+using ContactManagementSystem.DataAccessLayer.Repository;
+using ContactManagementSystem.BusinessLogicLayer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +20,7 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
     app.UseHsts();
 }
 

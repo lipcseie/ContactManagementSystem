@@ -1,6 +1,6 @@
-﻿using ContactManagementSystem.Models;
+﻿using ContactManagementSystem.Entities.Models;
 
-namespace ContactManagementSystem.Services
+namespace ContactManagementSystem.BusinessLogicLayer.Services
 {
     public interface IContactService
     {

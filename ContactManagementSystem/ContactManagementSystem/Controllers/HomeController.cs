@@ -1,5 +1,5 @@
-using ContactManagementSystem.Models;
-using ContactManagementSystem.Services;
+using ContactManagementSystem.Entities.Models;
+using ContactManagementSystem.BusinessLogicLayer.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;

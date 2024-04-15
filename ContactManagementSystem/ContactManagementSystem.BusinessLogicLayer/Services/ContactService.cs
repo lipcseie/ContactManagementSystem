@@ -1,8 +1,8 @@
-﻿using ContactManagementSystem.Models;
-using ContactManagementSystem.Repository;
+﻿using ContactManagementSystem.Entities.Models;
+using ContactManagementSystem.DataAccessLayer.Repository;
 
 
-namespace ContactManagementSystem.Services
+namespace ContactManagementSystem.BusinessLogicLayer.Services
 {
     public class ContactService : IContactService
     {

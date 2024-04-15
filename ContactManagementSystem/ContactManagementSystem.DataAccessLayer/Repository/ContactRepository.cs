@@ -1,8 +1,8 @@
-﻿using ContactManagementSystem.Models;
-using ContactManagementSystem.Context;
+﻿using ContactManagementSystem.Entities.Models;
+using ContactManagementSystem.DataAccessLayer.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContactManagementSystem.Repository
+namespace ContactManagementSystem.DataAccessLayer.Repository
 {
     public class ContactRepository : IContactRepository
     {

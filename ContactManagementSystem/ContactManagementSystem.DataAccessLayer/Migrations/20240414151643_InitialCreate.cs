@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace ContactManagementSystem.Migrations
+namespace ContactManagementSystem.DataAccessLayer.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
