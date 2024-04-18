@@ -10,8 +10,8 @@
 @if (Model.Count == 0)
 {
     <div class="alert alert-secondary mt-5" role="alert">
-        <h4 class="alert-heading">No data available</h4>
-        <p>Please add new contacts to view them here.</p>
+        <h4 class="text-center alert-heading">No data available</h4>
+        <p class="text-center">Please add new contacts to view them here.</p>
     </div>
 }
 else
@@ -46,5 +46,5 @@ else
 }
 
 <div class="text-center mt-4">
-    <a asp-area="" asp-controller="Home" asp-action="Create" class="btn btn-primary btn-lg">+ Add Contact</a>
+    <a asp-area="" asp-controller="Home" asp-action="Create" class="btn btn-primary">+ Add Contact</a>
 </div>

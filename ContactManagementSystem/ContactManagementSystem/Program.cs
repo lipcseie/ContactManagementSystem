@@ -5,7 +5,6 @@ using ContactManagementSystem.BusinessLogicLayer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ContactsContext>(options =>
@@ -16,7 +15,6 @@ builder.Services.AddScoped<IContactService, ContactService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
