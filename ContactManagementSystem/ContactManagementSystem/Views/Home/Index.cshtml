@@ -2,9 +2,15 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+
 <div class="text-center">
     <h1 class="display-4">Welcome to the Contact Management System</h1>
     <p class="lead">Easily manage your contacts all in one place.</p>
+    @if (TempData["success"] != null)
+    {
+        <h5 class="lead">@TempData["success"]</h5>
+    }
 </div>
 
 @if (Model.Count == 0)

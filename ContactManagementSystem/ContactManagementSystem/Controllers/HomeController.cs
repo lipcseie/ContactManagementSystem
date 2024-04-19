@@ -34,6 +34,7 @@ namespace ContactManagementSystem.Controllers
                 try
                 {
                     await _contactService.AddContactAsync(contact);
+                    TempData["success"] = "CONTACT CREATED SUCCESFULLY";
                     return RedirectToAction(nameof(Index));
 
                 }
@@ -65,6 +66,7 @@ namespace ContactManagementSystem.Controllers
                 try
                 {
                     await _contactService.UpdateContactAsync(contact);
+                    TempData["success"] = "CONTACT UPDATED SUCCESFULLY";
                     return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateException)
@@ -87,6 +89,7 @@ namespace ContactManagementSystem.Controllers
         public async Task<IActionResult> DeleteConfimed(int id)
         {
             await _contactService.DeleteContactAsync(id);
+            TempData["success"] = "CONTACT DELETED SUCCESFULLY";
             return RedirectToAction(nameof(Index));
         }
 
