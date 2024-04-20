@@ -17,6 +17,7 @@ The Contact Management System is an ASP.NET Core MVC web application designed to
 - Razor Views
 - N-tier architecture
 - Bootstrap
+- Toastr Notifications
 
 
 ## Getting Started
