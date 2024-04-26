@@ -45,14 +45,10 @@ else
                         <td>@contact.PhoneNumber</td>
                         <td>
                             <div data-toggle="tooltip" title="@contact.Notes">
-                                @if (contact.Notes.Length > 20)
-                                {
-                                    @:@contact.Notes.Substring(0, 20) + "..."
+                                @{
+                                    var displayNotes = contact.Notes.Length > 10 ? contact.Notes.Substring(0, 10) + "..." : contact.Notes;
                                 }
-                                else
-                                {
-                                    @:contact.Notes
-                                }
+                                @displayNotes
                             </div>
                         </td>
                         <td><a asp-action="Edit" asp-route-id="@contact.Id" class="text-primary"><i class="far fa-edit"></i></a></td>
