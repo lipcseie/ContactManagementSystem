@@ -22,8 +22,12 @@ else
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Zip</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">City</th>
                     <th scope="col">Address</th>
-                    <th scope="col">Number</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Notes</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -34,8 +38,23 @@ else
                     <tr>
                         <td>@contact.Id</td>
                         <td>@contact.Name</td>
+                        <td>@contact.Zip</td>
+                        <td>@contact.Country</td>
+                        <td>@contact.City</td>
                         <td>@contact.Address</td>
                         <td>@contact.PhoneNumber</td>
+                        <td>
+                            <div data-toggle="tooltip" title="@contact.Notes">
+                                @if (contact.Notes.Length > 20)
+                                {
+                                    @:@contact.Notes.Substring(0, 20) + "..."
+                                }
+                                else
+                                {
+                                    @:contact.Notes
+                                }
+                            </div>
+                        </td>
                         <td><a asp-action="Edit" asp-route-id="@contact.Id" class="text-primary"><i class="far fa-edit"></i></a></td>
                         <td><a asp-action="Delete" asp-route-id="@contact.Id" class="text-danger"><i class="far fa-trash-alt"></i></a></td>
                     </tr>

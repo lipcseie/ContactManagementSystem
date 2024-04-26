@@ -1,5 +1,6 @@
 ﻿using ContactManagementSystem.Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
 
 namespace ContactManagementSystem.DataAccessLayer.Context
 {
@@ -31,13 +32,27 @@ namespace ContactManagementSystem.DataAccessLayer.Context
                 .IsRequired();
 
             modelBuilder.Entity<Contact>()
+                .Property(c => c.Zip)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(c => c.Country)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(c => c.City)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(c => c.Notes);
+
+            modelBuilder.Entity<Contact>()
                 .HasIndex(c => c.Name)
                 .IsUnique();
 
             modelBuilder.Entity<Contact>()
                 .HasIndex(c => c.PhoneNumber)
                 .IsUnique();
-
 
             base.OnModelCreating(modelBuilder);
         }

@@ -15,7 +15,7 @@
                 <h5 class="card-title">Name: @Model.Name</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Address: @Model.Address</h6>
                 <p class="card-text">Number: @Model.PhoneNumber</p>
-
+                <p class="card-text">Notes: @Model.Notes</p>
                 <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="mt-4">
                     <input type="submit" value="Delete" class="btn btn-danger" />
                     <a asp-action="Index" class="btn btn-outline-secondary border">Cancel</a>
