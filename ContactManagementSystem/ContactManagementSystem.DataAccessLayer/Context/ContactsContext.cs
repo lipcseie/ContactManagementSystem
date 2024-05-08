@@ -44,9 +44,6 @@ namespace ContactManagementSystem.DataAccessLayer.Context
                 .IsRequired();
 
             modelBuilder.Entity<Contact>()
-                .Property(c => c.Notes);
-
-            modelBuilder.Entity<Contact>()
                 .HasIndex(c => c.Name)
                 .IsUnique();
 

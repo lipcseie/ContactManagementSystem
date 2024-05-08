@@ -27,7 +27,6 @@ else
                     <th scope="col">City</th>
                     <th scope="col">Address</th>
                     <th scope="col">Phone</th>
-                    <th scope="col">Notes</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -43,14 +42,6 @@ else
                         <td>@contact.City</td>
                         <td>@contact.Address</td>
                         <td>@contact.PhoneNumber</td>
-                        <td>
-                            <div data-toggle="tooltip" title="@contact.Notes">
-                                @{
-                                    var displayNotes = contact.Notes.Length > 10 ? contact.Notes.Substring(0, 10) + "..." : contact.Notes;
-                                }
-                                @displayNotes
-                            </div>
-                        </td>
                         <td><a asp-action="Edit" asp-route-id="@contact.Id" class="text-primary"><i class="far fa-edit"></i></a></td>
                         <td><a asp-action="Delete" asp-route-id="@contact.Id" class="text-danger"><i class="far fa-trash-alt"></i></a></td>
                     </tr>

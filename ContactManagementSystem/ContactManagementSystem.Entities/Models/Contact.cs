@@ -19,7 +19,5 @@ namespace ContactManagementSystem.Entities.Models
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "Phone number must be numeric")]
         public string PhoneNumber { get; set; }
 
-        public string Notes { get; set; }
-
     }
 }

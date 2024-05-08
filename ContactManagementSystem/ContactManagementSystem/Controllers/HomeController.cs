@@ -86,18 +86,19 @@ namespace ContactManagementSystem.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfimed(int id)
+        public async Task<IActionResult> DeleteConfimed(int id, Contact contact)
         {
             try
             {
                 await _contactService.DeleteContactAsync(id);
                 TempData["success"] = "CONTACT DELETED SUCCESFULLY";
+                return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateException)
             {
                 ModelState.AddModelError("", "Unable to delete contact. " + "The contact might have already been deleted or does not exist.");
             }
-            return RedirectToAction(nameof(Index));
+            return View(contact);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
