@@ -6,6 +6,7 @@ using ContactManagementSystem.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 public class HomeControllerTests
 {
@@ -51,5 +52,20 @@ public class HomeControllerTests
         Assert.Empty(model);
     }
 
+    [Fact]
+    public async Task Index_ReturnsViewResult_WithCorrectModel()
+    {
+        // Arrange
+        var mockService = new Mock<IContactService>();
+        mockService.Setup(service => service.GetAllContactsAsync()).ReturnsAsync(GetTestContacts());
+        var controller = new HomeController(mockService.Object);
 
+        // Act
+        var result = await controller.Index();
+
+        // Assert
+        var viewResult = Assert.IsType<ViewResult>(result);
+        var model = Assert.IsAssignableFrom<List<Contact>>(viewResult.Model);
+        Assert.Equal(2, model.Count);
+    }
 }
