@@ -68,4 +68,23 @@ public class HomeControllerTests
         var model = Assert.IsAssignableFrom<List<Contact>>(viewResult.Model);
         Assert.Equal(2, model.Count);
     }
+
+    [Fact]
+    public async Task Create_InvalidModelState_ReturnsViewWithError()
+    {
+        // Arrange
+        var mockService = new Mock<IContactService>();
+        var controller = new HomeController(mockService.Object);
+        controller.ModelState.AddModelError("Name", "The Name field is required.");
+
+        // Act
+        var result = await controller.Create(new Contact());
+
+        // Assert
+        var viewResult = Assert.IsType<ViewResult>(result);
+        Assert.False(viewResult.ViewData.ModelState.IsValid);
+        Assert.Equal(1, viewResult.ViewData.ModelState.ErrorCount); 
+
+    }
+
 }
