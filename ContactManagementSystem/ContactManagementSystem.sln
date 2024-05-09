@@ -5,11 +5,13 @@ VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManagementSystem", "ContactManagementSystem\ContactManagementSystem.csproj", "{133F7B17-D70F-4DB2-ACA2-D043497A8312}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManagementSystem.DataAccessLayer", "ContactManagementSystem.DataAccessLayer\ContactManagementSystem.DataAccessLayer.csproj", "{4AF6995D-79A9-4025-9DBD-79DA76B39304}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManagementSystem.DataAccessLayer", "ContactManagementSystem.DataAccessLayer\ContactManagementSystem.DataAccessLayer.csproj", "{4AF6995D-79A9-4025-9DBD-79DA76B39304}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManagementSystem.BusinessLogicLayer", "ContactManagementSystem.BusinessLogicLayer\ContactManagementSystem.BusinessLogicLayer.csproj", "{726FDF72-AFBB-4571-BEC7-897913F742BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManagementSystem.BusinessLogicLayer", "ContactManagementSystem.BusinessLogicLayer\ContactManagementSystem.BusinessLogicLayer.csproj", "{726FDF72-AFBB-4571-BEC7-897913F742BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManagementSystem.Entities", "ContactManagementSystem.Entities\ContactManagementSystem.Entities.csproj", "{1BF30EDC-ABFA-4BB9-B282-F1F4544887F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManagementSystem.Entities", "ContactManagementSystem.Entities\ContactManagementSystem.Entities.csproj", "{1BF30EDC-ABFA-4BB9-B282-F1F4544887F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManagementSystem.Tests", "ContactManagementSystem.Tests\ContactManagementSystem.Tests.csproj", "{47770DB9-8761-4C88-8F85-ECD15A39DD4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1BF30EDC-ABFA-4BB9-B282-F1F4544887F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BF30EDC-ABFA-4BB9-B282-F1F4544887F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BF30EDC-ABFA-4BB9-B282-F1F4544887F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47770DB9-8761-4C88-8F85-ECD15A39DD4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47770DB9-8761-4C88-8F85-ECD15A39DD4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47770DB9-8761-4C88-8F85-ECD15A39DD4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47770DB9-8761-4C88-8F85-ECD15A39DD4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

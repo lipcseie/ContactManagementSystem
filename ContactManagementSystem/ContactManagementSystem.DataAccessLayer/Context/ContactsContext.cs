@@ -6,7 +6,7 @@ namespace ContactManagementSystem.DataAccessLayer.Context
 {
     public class ContactsContext : DbContext
     {
-        public DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
 
         public ContactsContext(DbContextOptions<ContactsContext> options) : base(options)
         {
