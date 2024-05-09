@@ -34,4 +34,22 @@ public class HomeControllerTests
         Assert.Equal(2, model.Count);
     }
 
+    [Fact]
+    public async Task Index_ReturnsViewResult_WithEmptyListOfContacts()
+    {
+        // Arrange
+        var mockService = new Mock<IContactService>();
+        mockService.Setup(service => service.GetAllContactsAsync()).ReturnsAsync(new List<Contact>());
+        var controller = new HomeController(mockService.Object);
+
+        // Act
+        var result = await controller.Index();
+
+        // Assert
+        var viewResult = Assert.IsType<ViewResult>(result);
+        var model = Assert.IsAssignableFrom<List<Contact>>(viewResult.Model);
+        Assert.Empty(model);
+    }
+
+
 }
