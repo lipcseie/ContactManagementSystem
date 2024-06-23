@@ -4,6 +4,7 @@ using ContactManagementSystem.Entities.Models;
 using ContactManagementSystem.BusinessLogicLayer.Services;
 using ContactManagementSystem.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class HomeControllerTests
 {
@@ -21,10 +22,20 @@ public class HomeControllerTests
     public HomeControllerTests()
     {
         mockService = new Mock<IContactService>();
-        controller = new HomeController(mockService.Object);
+        //controller = new HomeController(mockService.Object);
+
+        // Setup tempdata
+        var tempData = new Mock<ITempDataDictionary>();
+        tempData.Setup(t => t["succsess"]).Returns("CONTACT CREATED SUCCESFULLY");
+        controller = new HomeController(mockService.Object)
+        {
+            TempData = tempData.Object
+        };
+
     }
 
     [Fact]
+    [Trait("Category", "Index")]
     public async Task Index_ReturnsAViewResult_WithAListOfContacts()
     {
         // Arrange
@@ -40,6 +51,7 @@ public class HomeControllerTests
     }
 
     [Fact]
+    [Trait("Category", "Index")]
     public async Task Index_ReturnsViewResult_WithEmptyListOfContacts()
     {
         // Arrange
@@ -55,6 +67,7 @@ public class HomeControllerTests
     }
 
     [Fact]
+    [Trait("Category", "Index")]
     public async Task Index_ReturnsViewResult_WithCorrectModel()
     {
         // Arrange
@@ -70,6 +83,7 @@ public class HomeControllerTests
     }
 
     [Fact]
+    [Trait("Category", "Create")]
     public async Task Create_InvalidModelState_ReturnsViewWithError()
     {
         // Arrange
