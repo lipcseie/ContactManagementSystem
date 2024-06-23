@@ -5,6 +5,7 @@ using ContactManagementSystem.BusinessLogicLayer.Services;
 using ContactManagementSystem.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore;
 
 public class HomeControllerTests
 {
@@ -115,5 +116,24 @@ public class HomeControllerTests
         Assert.Equal("CONTACT CREATED SUCCESFULLY", controller.TempData["succsess"]);
         mockService.Verify(s => s.AddContactAsync(contact), Times.Once);
     }
+
+    [Fact]
+    public async Task Create_DatabaseError_ReturnsErrorView()
+    {
+        // Arrange
+        var contact = new Contact();
+        controller.ModelState.Clear();  // Ensure ModelState is valid
+
+        mockService.Setup(service => service.AddContactAsync(contact)).ThrowsAsync(new DbUpdateException());
+
+        // Act
+        var result = await controller.Create(contact);
+
+        // Assert
+        var viewResult = Assert.IsType<ViewResult>(result);
+        Assert.Equal("Error", viewResult.ViewName); // Assuming "Error" is your error view
+        Assert.Equal("Unable to save changes.", viewResult.ViewData["ErrorMessage"]);
+    }
+
 
 }
