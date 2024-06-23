@@ -22,7 +22,6 @@ public class HomeControllerTests
     public HomeControllerTests()
     {
         mockService = new Mock<IContactService>();
-        //controller = new HomeController(mockService.Object);
 
         // Setup tempdata
         var tempData = new Mock<ITempDataDictionary>();
@@ -96,7 +95,25 @@ public class HomeControllerTests
         var viewResult = Assert.IsType<ViewResult>(result);
         Assert.False(viewResult.ViewData.ModelState.IsValid);
         Assert.Equal(1, viewResult.ViewData.ModelState.ErrorCount); 
+    }
 
+    [Fact]
+    [Trait("Category","Create")]
+    public async Task Create_ValidModel_RedirectsToIndex()
+    {
+        // Arrange
+        var contact = new Contact();
+        controller.ModelState.Clear();
+        mockService.Setup(service => service.AddContactAsync(contact)).Returns(Task.CompletedTask);
+
+        // Act
+        var result = await controller.Create(contact);
+
+        // Assert
+        var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+        Assert.Equal("Index", redirectResult.ActionName);
+        Assert.Equal("CONTACT CREATED SUCCESFULLY", controller.TempData["succsess"]);
+        mockService.Verify(s => s.AddContactAsync(contact), Times.Once);
     }
 
 }
