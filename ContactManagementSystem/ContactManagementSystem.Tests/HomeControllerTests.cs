@@ -4,9 +4,6 @@ using ContactManagementSystem.Entities.Models;
 using ContactManagementSystem.BusinessLogicLayer.Services;
 using ContactManagementSystem.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 public class HomeControllerTests
 {
@@ -18,13 +15,20 @@ public class HomeControllerTests
         return contacts;
     }
 
+    private readonly Mock<IContactService> mockService;
+    private readonly HomeController controller;
+
+    public HomeControllerTests()
+    {
+        mockService = new Mock<IContactService>();
+        controller = new HomeController(mockService.Object);
+    }
+
     [Fact]
     public async Task Index_ReturnsAViewResult_WithAListOfContacts()
     {
         // Arrange
-        var mockService = new Mock<IContactService>();
         mockService.Setup(service => service.GetAllContactsAsync()).ReturnsAsync(GetTestContacts());
-        var controller = new HomeController(mockService.Object);
 
         // Act
        var result = await controller.Index();
@@ -39,9 +43,7 @@ public class HomeControllerTests
     public async Task Index_ReturnsViewResult_WithEmptyListOfContacts()
     {
         // Arrange
-        var mockService = new Mock<IContactService>();
         mockService.Setup(service => service.GetAllContactsAsync()).ReturnsAsync(new List<Contact>());
-        var controller = new HomeController(mockService.Object);
 
         // Act
         var result = await controller.Index();
@@ -56,9 +58,7 @@ public class HomeControllerTests
     public async Task Index_ReturnsViewResult_WithCorrectModel()
     {
         // Arrange
-        var mockService = new Mock<IContactService>();
         mockService.Setup(service => service.GetAllContactsAsync()).ReturnsAsync(GetTestContacts());
-        var controller = new HomeController(mockService.Object);
 
         // Act
         var result = await controller.Index();
@@ -73,8 +73,6 @@ public class HomeControllerTests
     public async Task Create_InvalidModelState_ReturnsViewWithError()
     {
         // Arrange
-        var mockService = new Mock<IContactService>();
-        var controller = new HomeController(mockService.Object);
         controller.ModelState.AddModelError("Name", "The Name field is required.");
 
         // Act
