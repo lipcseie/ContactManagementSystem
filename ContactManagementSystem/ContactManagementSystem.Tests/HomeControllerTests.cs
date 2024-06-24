@@ -118,12 +118,12 @@ public class HomeControllerTests
     }
 
     [Fact]
-    public async Task Create_DatabaseError_ReturnsErrorView()
+    [Trait("Category", "Create")]
+    public async Task Create_DbUpdateException_ReturnsViewWithErrorMessage()
     {
         // Arrange
-        var contact = new Contact();
-        controller.ModelState.Clear();  // Ensure ModelState is valid
-
+        var contact = new Contact { Name = "Bilbo Baggins", PhoneNumber = "1112223333" };
+        controller.ModelState.Clear();
         mockService.Setup(service => service.AddContactAsync(contact)).ThrowsAsync(new DbUpdateException());
 
         // Act
@@ -131,9 +131,8 @@ public class HomeControllerTests
 
         // Assert
         var viewResult = Assert.IsType<ViewResult>(result);
-        Assert.Equal("Error", viewResult.ViewName); // Assuming "Error" is your error view
-        Assert.Equal("Unable to save changes.", viewResult.ViewData["ErrorMessage"]);
+        Assert.True(viewResult.ViewData.ModelState.ErrorCount > 0);
+        Assert.Equal("Unable to save changes. A contact with the same name or phone number already exists.", viewResult.ViewData.ModelState[string.Empty].Errors.First().ErrorMessage);
+        mockService.Verify(s => s.AddContactAsync(contact), Times.Once);
     }
-
-
 }
