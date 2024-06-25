@@ -152,4 +152,18 @@ public class HomeControllerTests
         var model = Assert.IsAssignableFrom<Contact>(viewResult.ViewData.Model);
         Assert.Equal(contact.Id, model.Id);
     }
+
+    [Fact]
+    [Trait("Category", "Edit")]
+    public async Task Edit_IdMismatch_ReturnsNotFound()
+    {
+        // Arrange
+        var contact = GetTestContacts().FirstOrDefault();
+
+        // Act
+        var result = await controller.Edit(contact.Id + 1, contact);
+
+        // Assert
+        Assert.IsType<NotFoundResult>(result);
+    }
 }
