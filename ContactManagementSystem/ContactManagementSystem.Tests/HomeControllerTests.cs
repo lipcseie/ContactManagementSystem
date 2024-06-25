@@ -114,7 +114,7 @@ public class HomeControllerTests
         var redirectResult = Assert.IsType<RedirectToActionResult>(result);
         Assert.Equal("Index", redirectResult.ActionName);
         Assert.Equal("CONTACT CREATED SUCCESFULLY", controller.TempData["succsess"]);
-        mockService.Verify(s => s.AddContactAsync(contact), Times.Once);
+        mockService.Verify(service => service.AddContactAsync(contact), Times.Once);
     }
 
     [Fact]
@@ -133,6 +133,23 @@ public class HomeControllerTests
         var viewResult = Assert.IsType<ViewResult>(result);
         Assert.True(viewResult.ViewData.ModelState.ErrorCount > 0);
         Assert.Equal("Unable to save changes. A contact with the same name or phone number already exists.", viewResult.ViewData.ModelState[string.Empty].Errors.First().ErrorMessage);
-        mockService.Verify(s => s.AddContactAsync(contact), Times.Once);
+        mockService.Verify(service => service.AddContactAsync(contact), Times.Once);
+    }
+
+    [Fact]
+    [Trait("Categry", "Edit")]
+    public async Task Edit_ValidId_ReturnsViewResultWithContact()
+    {
+        // Arrange
+        var contact = GetTestContacts().First();
+        mockService.Setup(service => service.GetContactByIdAsync(contact.Id)).ReturnsAsync(contact);
+
+        // Act
+        var result = await controller.Edit(contact.Id);
+
+        // Assert
+        var viewResult = Assert.IsType<ViewResult>(result);
+        var model = Assert.IsAssignableFrom<Contact>(viewResult.ViewData.Model);
+        Assert.Equal(contact.Id, model.Id);
     }
 }
