@@ -27,6 +27,7 @@ public class HomeControllerTests
         // Setup tempdata
         var tempData = new Mock<ITempDataDictionary>();
         tempData.Setup(t => t["succsess"]).Returns("CONTACT CREATED SUCCESFULLY");
+
         controller = new HomeController(mockService.Object)
         {
             TempData = tempData.Object
@@ -221,4 +222,5 @@ public class HomeControllerTests
         Assert.Equal("Unable to delete contact. The contact might have already been deleted or does not exist.", viewResult.ViewData.ModelState[string.Empty].Errors.First().ErrorMessage);
         mockService.Verify(service => service.DeleteContactAsync(contact.Id), Times.Once);
     }
+
 }
