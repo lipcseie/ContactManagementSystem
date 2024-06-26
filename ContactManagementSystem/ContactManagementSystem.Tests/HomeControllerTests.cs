@@ -137,7 +137,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Categry", "Edit")]
+    [Trait("Category", "Edit")]
     public async Task Edit_ValidId_ReturnsViewResultWithContact()
     {
         // Arrange
@@ -184,5 +184,25 @@ public class HomeControllerTests
         Assert.True(viewResult.ViewData.ModelState.ErrorCount > 0);
         Assert.Equal("Unable to save changes. A contact with the same name or phone number already exists.", viewResult.ViewData.ModelState[string.Empty].Errors.First().ErrorMessage);
         mockService.Verify(service => service.UpdateContactAsync(contact), Times.Once);
+    }
+
+    [Fact]
+    [Trait("Category","Delete")]
+    public async Task Delete_ValidId_ReturnsViewResultWithContact()
+    {
+        // Arrange
+        var contact = GetTestContacts().First();
+        controller.ModelState.Clear();
+        mockService.Setup(service => service.GetContactByIdAsync(contact.Id)).ReturnsAsync(contact);
+
+        // Act
+        var result = await controller.Delete(contact.Id);
+
+        // Assert
+        var viewResult = Assert.IsType<ViewResult>(result);
+        var model = Assert.IsAssignableFrom<Contact>(viewResult.ViewData.Model);
+        Assert.Equal(contact.Id, model.Id);
+
+
     }
 }
