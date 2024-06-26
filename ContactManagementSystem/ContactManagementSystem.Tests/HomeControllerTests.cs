@@ -42,7 +42,7 @@ public class HomeControllerTests
         mockService.Setup(service => service.GetAllContactsAsync()).ReturnsAsync(GetTestContacts());
 
         // Act
-       var result = await controller.Index();
+        var result = await controller.Index();
 
         // Assert
         var viewResult = Assert.IsType<ViewResult>(result);
@@ -95,11 +95,11 @@ public class HomeControllerTests
         // Assert
         var viewResult = Assert.IsType<ViewResult>(result);
         Assert.False(viewResult.ViewData.ModelState.IsValid);
-        Assert.Equal(1, viewResult.ViewData.ModelState.ErrorCount); 
+        Assert.Equal(1, viewResult.ViewData.ModelState.ErrorCount);
     }
 
     [Fact]
-    [Trait("Category","Create")]
+    [Trait("Category", "Create")]
     public async Task Create_ValidModel_RedirectsToIndex()
     {
         // Arrange
@@ -187,7 +187,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category","Delete")]
+    [Trait("Category", "Delete")]
     public async Task Delete_ValidId_ReturnsViewResultWithContact()
     {
         // Arrange
@@ -204,24 +204,21 @@ public class HomeControllerTests
         Assert.Equal(contact.Id, model.Id);
     }
 
-
     [Fact]
     [Trait("Category", "Delete")]
-    public async Task DeleteConfimed_ValidId_RedirectsToIndex()
+    public async Task DeleteConfimed_DbUpdateException_ReturnsViewWithErrorMessage()
     {
         // Arrange
         var contact = GetTestContacts().First();
-        controller.ModelState.Clear();
-        mockService.Setup(service => service.DeleteContactAsync(contact.Id)).Returns(Task.CompletedTask);
+        mockService.Setup(service => service.DeleteContactAsync(contact.Id)).ThrowsAsync(new DbUpdateException());
 
         // Act
         var result = await controller.DeleteConfimed(contact.Id, contact);
 
         // Assert
-        var redirectResult = Assert.IsType<RedirectToActionResult>(result);
-        Assert.Equal("Index", redirectResult.ActionName);
-        //Assert.Equal("CONTACT DELETED SUCCESFULLY", controller.TempData["success"]);
+        var viewResult = Assert.IsType<ViewResult>(result);
+        Assert.True(viewResult.ViewData.ModelState.ErrorCount > 0);
+        Assert.Equal("Unable to delete contact. The contact might have already been deleted or does not exist.", viewResult.ViewData.ModelState[string.Empty].Errors.First().ErrorMessage);
         mockService.Verify(service => service.DeleteContactAsync(contact.Id), Times.Once);
     }
-
 }
