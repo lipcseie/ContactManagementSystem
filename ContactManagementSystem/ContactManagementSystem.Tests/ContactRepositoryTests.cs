@@ -8,8 +8,8 @@ namespace ContactManagementSystem.Tests
     public class ContactRepositoryTests
     {
         [Fact]
-        [Trait("category", "Repository")]
-        public async Task GetAllContacts_ReturnsEmptyList()
+        [Trait("ategory", "Repository")]
+        public async Task GetAllContacts_WhenNoContactsExist_ReturnsEmptyList()
         {
             // Arrange
             var mockRepo = new Mock<IContactRepository>();
