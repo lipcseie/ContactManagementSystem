@@ -7,14 +7,22 @@ namespace ContactManagementSystem.Tests
 {
     public class ContactRepositoryTests
     {
+        private readonly Mock<IContactRepository> mockRepo;
+        private readonly ContactService contactService;
+
+        public ContactRepositoryTests()
+        {
+            mockRepo = new Mock<IContactRepository>();
+            contactService = new ContactService(mockRepo.Object);
+        }
+
         [Fact]
-        [Trait("ategory", "Repository")]
+        [Trait("Category", "Repository")]
         public async Task GetAllContacts_WhenNoContactsExist_ReturnsEmptyList()
         {
             // Arrange
-            var mockRepo = new Mock<IContactRepository>();
             mockRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(new List<Contact>());
-            var contactService = new ContactService(mockRepo.Object);
+            
 
             // Act
             var result = await contactService.GetAllContactsAsync();

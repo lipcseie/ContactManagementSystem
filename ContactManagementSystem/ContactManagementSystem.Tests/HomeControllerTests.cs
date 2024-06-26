@@ -222,5 +222,4 @@ public class HomeControllerTests
         Assert.Equal("Unable to delete contact. The contact might have already been deleted or does not exist.", viewResult.ViewData.ModelState[string.Empty].Errors.First().ErrorMessage);
         mockService.Verify(service => service.DeleteContactAsync(contact.Id), Times.Once);
     }
-
 }
