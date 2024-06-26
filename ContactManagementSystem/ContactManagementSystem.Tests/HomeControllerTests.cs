@@ -166,4 +166,23 @@ public class HomeControllerTests
         // Assert
         Assert.IsType<NotFoundResult>(result);
     }
+
+    [Fact]
+    [Trait("Category", "Edit")]
+    public async Task Edit_DbUpdateException_ReturnsViewWithErrorMessage()
+    {
+        // Arrange
+        var contact = GetTestContacts().First();
+        controller.ModelState.Clear();
+        mockService.Setup(service => service.UpdateContactAsync(contact)).ThrowsAsync(new DbUpdateException());
+
+        // Act
+        var result = await controller.Edit(contact.Id, contact);
+
+        // Assert
+        var viewResult = Assert.IsType<ViewResult>(result);
+        Assert.True(viewResult.ViewData.ModelState.ErrorCount > 0);
+        Assert.Equal("Unable to save changes. A contact with the same name or phone number already exists.", viewResult.ViewData.ModelState[string.Empty].Errors.First().ErrorMessage);
+        mockService.Verify(service => service.UpdateContactAsync(contact), Times.Once);
+    }
 }
