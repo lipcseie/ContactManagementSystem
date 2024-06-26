@@ -202,7 +202,26 @@ public class HomeControllerTests
         var viewResult = Assert.IsType<ViewResult>(result);
         var model = Assert.IsAssignableFrom<Contact>(viewResult.ViewData.Model);
         Assert.Equal(contact.Id, model.Id);
-
-
     }
+
+
+    [Fact]
+    [Trait("Category", "Delete")]
+    public async Task DeleteConfimed_ValidId_RedirectsToIndex()
+    {
+        // Arrange
+        var contact = GetTestContacts().First();
+        controller.ModelState.Clear();
+        mockService.Setup(service => service.DeleteContactAsync(contact.Id)).Returns(Task.CompletedTask);
+
+        // Act
+        var result = await controller.DeleteConfimed(contact.Id, contact);
+
+        // Assert
+        var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+        Assert.Equal("Index", redirectResult.ActionName);
+        //Assert.Equal("CONTACT DELETED SUCCESFULLY", controller.TempData["success"]);
+        mockService.Verify(service => service.DeleteContactAsync(contact.Id), Times.Once);
+    }
+
 }
