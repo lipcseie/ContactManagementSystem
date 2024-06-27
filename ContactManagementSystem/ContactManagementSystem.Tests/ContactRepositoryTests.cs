@@ -30,5 +30,26 @@ namespace ContactManagementSystem.Tests
             // Assert
             Assert.Empty(result);
         }
+
+        [Fact]
+        [Trait("Category", "Repository")]
+        public async Task GetAllContacts_WhenContactsExist_ReturnsAllContacts()
+        {
+            // Arrange
+            var mockContacts = new List<Contact>
+            {
+                new Contact { Id = 1, Name = "Frodo Baggins" },
+                new Contact { Id = 2, Name = "Samwise Gamgee" }
+            };
+            mockRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(mockContacts);
+
+            // Act
+            var result = await contactService.GetAllContactsAsync();
+
+            // Assert
+            Assert.Equal(2, result.Count());
+            Assert.Contains(result, c => c.Name == "Frodo Baggins");
+            Assert.Contains(result, c => c.Name == "Samwise Gamgee");
+        }
     }
 }
