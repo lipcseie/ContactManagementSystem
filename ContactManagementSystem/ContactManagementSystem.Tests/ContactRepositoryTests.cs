@@ -101,5 +101,19 @@ namespace ContactManagementSystem.Tests
             mockRepo.Verify(repo => repo.AddContactAsync(mockContact), Times.Once);
 
         }
+
+        [Fact]
+        [Trait("Category", "ContactRepository_UpdateContactAsync")]
+        public async Task UpdateContactAsync_UpdatesContactSuccessfully()
+        {
+            // Arrange
+            mockRepo.Setup(repo => repo.UpdateContactAsync(mockContact)).Returns(Task.CompletedTask);
+
+            // Act
+            await contactService.UpdateContactAsync(mockContact);
+
+            // Assert
+            mockRepo.Verify(repo => repo.UpdateContactAsync(mockContact), Times.Once);
+        }
     }
 }
