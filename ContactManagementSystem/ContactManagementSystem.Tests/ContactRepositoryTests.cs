@@ -17,7 +17,7 @@ namespace ContactManagementSystem.Tests
         }
 
         [Fact]
-        [Trait("Category", "Repository")]
+        [Trait("Category", "ContactRepository_GetAllContacts")]
         public async Task GetAllContacts_WhenNoContactsExist_ReturnsEmptyList()
         {
             // Arrange
@@ -32,7 +32,7 @@ namespace ContactManagementSystem.Tests
         }
 
         [Fact]
-        [Trait("Category", "Repository")]
+        [Trait("Category", "ContactRepository_GetAllContacts")]
         public async Task GetAllContacts_WhenContactsExist_ReturnsAllContacts()
         {
             // Arrange
@@ -53,7 +53,7 @@ namespace ContactManagementSystem.Tests
         }
 
         [Fact]
-        [Trait("Category","Repository")]
+        [Trait("Category", "ContactRepository_GetByIdAsync")]
         public async Task GetByIdAsync_WhenContactExists_ReturnsContact()
         {
             // Arrange

@@ -36,7 +36,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category", "Index")]
+    [Trait("Category", "HomeController_Index")]
     public async Task Index_ReturnsAViewResult_WithAListOfContacts()
     {
         // Arrange
@@ -52,7 +52,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category", "Index")]
+    [Trait("Category", "HomeController_Index")]
     public async Task Index_ReturnsViewResult_WithEmptyListOfContacts()
     {
         // Arrange
@@ -68,7 +68,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category", "Index")]
+    [Trait("Category", "HomeController_Index")]
     public async Task Index_ReturnsViewResult_WithCorrectModel()
     {
         // Arrange
@@ -84,7 +84,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category", "Create")]
+    [Trait("Category", "HomeController_Create")]
     public async Task Create_InvalidModelState_ReturnsViewWithError()
     {
         // Arrange
@@ -100,7 +100,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category", "Create")]
+    [Trait("Category", "HomeController_Create")]
     public async Task Create_ValidModel_RedirectsToIndex()
     {
         // Arrange
@@ -119,7 +119,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category", "Create")]
+    [Trait("Category", "HomeController_Create")]
     public async Task Create_DbUpdateException_ReturnsViewWithErrorMessage()
     {
         // Arrange
@@ -138,7 +138,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category", "Edit")]
+    [Trait("Category", "HomeController_Edit")]
     public async Task Edit_ValidId_ReturnsViewResultWithContact()
     {
         // Arrange
@@ -155,7 +155,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category", "Edit")]
+    [Trait("Category", "HomeController_Edit")]
     public async Task Edit_IdMismatch_ReturnsNotFound()
     {
         // Arrange
@@ -169,7 +169,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category", "Edit")]
+    [Trait("Category", "HomeController_Edit")]
     public async Task Edit_DbUpdateException_ReturnsViewWithErrorMessage()
     {
         // Arrange
@@ -188,7 +188,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category", "Delete")]
+    [Trait("Category", "HomeController_Delete")]
     public async Task Delete_ValidId_ReturnsViewResultWithContact()
     {
         // Arrange
@@ -206,7 +206,7 @@ public class HomeControllerTests
     }
 
     [Fact]
-    [Trait("Category", "Delete")]
+    [Trait("Category", "HomeController_Delete")]
     public async Task DeleteConfimed_DbUpdateException_ReturnsViewWithErrorMessage()
     {
         // Arrange
