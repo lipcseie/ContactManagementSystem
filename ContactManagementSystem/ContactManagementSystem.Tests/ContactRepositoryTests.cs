@@ -115,5 +115,19 @@ namespace ContactManagementSystem.Tests
             // Assert
             mockRepo.Verify(repo => repo.UpdateContactAsync(mockContact), Times.Once);
         }
+
+        [Fact]
+        [Trait("category", "DeleteContactAsyncDeleteContactAsync")]
+        public async Task DeleteContactAsync_DeletesContactSuccessfully()
+        {
+            // Arrange
+            mockRepo.Setup(repo => repo.DeleteContactAsync(1)).Returns(Task.CompletedTask);
+
+            // At
+            await contactService.DeleteContactAsync(1);
+
+            // Assert
+            mockRepo.Verify(repo => repo.DeleteContactAsync(1), Times.Once);
+        }
     }
 }
