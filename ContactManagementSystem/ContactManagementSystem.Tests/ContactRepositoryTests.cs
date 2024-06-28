@@ -51,5 +51,23 @@ namespace ContactManagementSystem.Tests
             Assert.Contains(result, c => c.Name == "Frodo Baggins");
             Assert.Contains(result, c => c.Name == "Samwise Gamgee");
         }
+
+        [Fact]
+        [Trait("Category","Repository")]
+        public async Task GetByIdAsync_WhenContactExists_ReturnsContact()
+        {
+            // Arrange
+            var mockContact = new Contact { Id = 1, Name = "Bilbo Baggins" };
+            mockRepo.Setup(repo => repo.GetByIdAsync(1)).ReturnsAsync(mockContact);
+
+            // Act
+            var result = await contactService.GetContactByIdAsync(1);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(1, result.Id);
+            Assert.Equal("Bilbo Baggins", result.Name);
+
+        }
     }
 }
