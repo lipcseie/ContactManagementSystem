@@ -129,7 +129,7 @@ namespace ContactManagementSystem.Tests
 
 
         [Fact]
-        [Trait("Category", "ContactRepository_cDeleteContactAsync")]
+        [Trait("Category", "ContactRepository_DeleteContactAsync")]
         public async Task DeleteContactAsync_DeletesContactSuccessfully()
         {
             // Arrange
@@ -141,5 +141,17 @@ namespace ContactManagementSystem.Tests
             // Assert
             mockRepo.Verify(repo => repo.DeleteContactAsync(1), Times.Once);
         }
+
+        [Fact]
+        [Trait("Category", "ContactRepository_DeleteContactAsync")]
+        public async Task DeleteContactAsync_WhenContactDoesNotExist_ThrowsException()
+        {
+            // Arrange
+            mockRepo.Setup(repo => repo.DeleteContactAsync(99)).ThrowsAsync(new KeyNotFoundException());
+
+            // Act & Assert
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => contactService.DeleteContactAsync(99));
+        }
+
     }
 }
