@@ -16,6 +16,9 @@ namespace ContactManagementSystem.Tests
             contactService = new ContactService(mockRepo.Object);
         }
 
+        private Contact mockContact = new Contact { Id = 1, Name = "Bilbo Baggins" };
+
+
         [Fact]
         [Trait("Category", "ContactRepository_GetAllContacts")]
         public async Task GetAllContacts_WhenNoContactsExist_ReturnsEmptyList()
@@ -57,7 +60,6 @@ namespace ContactManagementSystem.Tests
         public async Task GetByIdAsync_WhenContactExists_ReturnsContact()
         {
             // Arrange
-            var mockContact = new Contact { Id = 1, Name = "Bilbo Baggins" };
             mockRepo.Setup(repo => repo.GetByIdAsync(1)).ReturnsAsync(mockContact);
 
             // Act
@@ -67,6 +69,21 @@ namespace ContactManagementSystem.Tests
             Assert.NotNull(result);
             Assert.Equal(1, result.Id);
             Assert.Equal("Bilbo Baggins", result.Name);
+
+        }
+
+        [Fact]
+        [Trait("Category", "ContactRepository_GetByIdAsync")]
+        public async Task GetByIdAsync_WhenContactDoesNotExist_ReturnsNull()
+        {
+            // Arrange
+            mockRepo.Setup(repo => repo.GetByIdAsync(1)).ReturnsAsync((Contact)null);
+
+            // Act
+            var result = await contactService.GetContactByIdAsync(1);
+
+            // Assert
+            Assert.Null(result);
 
         }
     }
