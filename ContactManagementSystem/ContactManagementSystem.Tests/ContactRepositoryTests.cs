@@ -117,7 +117,19 @@ namespace ContactManagementSystem.Tests
         }
 
         [Fact]
-        [Trait("category", "DeleteContactAsyncDeleteContactAsync")]
+        [Trait("Category", "ContactRepository_UpdateContactAsync")]
+        public async Task UpdateContactAsync_WhenContactDoesNotExist_ThrowsException()
+        {
+            // Arrange
+            mockRepo.Setup(repo => repo.UpdateContactAsync(mockContact)).ThrowsAsync(new KeyNotFoundException());
+
+            // Act & Assert
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => contactService.UpdateContactAsync(mockContact));
+        }
+
+
+        [Fact]
+        [Trait("Category", "ContactRepository_cDeleteContactAsync")]
         public async Task DeleteContactAsync_DeletesContactSuccessfully()
         {
             // Arrange
