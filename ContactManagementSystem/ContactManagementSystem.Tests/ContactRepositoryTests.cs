@@ -86,5 +86,20 @@ namespace ContactManagementSystem.Tests
             Assert.Null(result);
 
         }
+
+        [Fact]
+        [Trait("Category", "ContactRepository_AddContactAsync")]
+        public async Task AddContactAsync_AddsContactSuccessfully()
+        {
+            // Arrange
+            mockRepo.Setup(repo => repo.AddContactAsync(mockContact)).Returns(Task.CompletedTask);
+
+            // Act
+            await contactService.AddContactAsync(mockContact);
+
+            // Asseer
+            mockRepo.Verify(repo => repo.AddContactAsync(mockContact), Times.Once);
+
+        }
     }
 }
