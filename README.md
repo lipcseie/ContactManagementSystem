@@ -9,6 +9,7 @@ The Contact Management System is an ASP.NET Core MVC web application designed to
 - **Edit Contact**: Update contact details.
 - **Delete Contact**: Remove contacts from the system.
 - **Error Handling**: Custom error response page for handling exceptions.
+- **Tested with xUnit**:Unit tests implemented using xUnit to ensure the reliability and correctness of the application.
 
 ## Technologies
 - ASP.NET Core MVC
